@@ -12,19 +12,21 @@ import java.util.*;
 class Solution
 {
     //Function to check if a string is Pangram or not.
-    public static boolean checkPangram  (String str) {
+    public static boolean checkPangram  (String s) {
         // your code here
-        Set<Character> s1=new HashSet<>();
-        str=str.toLowerCase();
-        for(int i=0;i<str.length();i++){
-            if(str.charAt(i)>='a' && str.charAt(i)<='z'){
-                s1.add(str.charAt(i));
+        String s1=s.toLowerCase();
+        int c=0;
+        for(int i=0;i<s1.length();i++){
+            if(s1.charAt(i)>='a'&& s1.charAt(i)<='z'){
+                c=c|(1<<(s1.charAt(i)-'a'));
+            }
+            if(c+1==(1<<26)){
+                return true;
             }
         }
-        if(s1.size()==26){
-            return true;
-        }
         return false;
+        
+        
     }
 }
 
