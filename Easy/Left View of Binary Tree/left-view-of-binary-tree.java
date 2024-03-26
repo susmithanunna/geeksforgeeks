@@ -106,6 +106,8 @@ class GfG {
 // } Driver Code Ends
 
 
+
+
 //User function Template for Java
 
 /* A Binary Tree node
@@ -123,32 +125,23 @@ class Node
 class Tree
 {
     //Function to return list containing elements of left view of binary tree.
+     ArrayList<Integer> ans=new ArrayList<>();
     ArrayList<Integer> leftView(Node root)
     {
       // Your code here
-       ArrayList<Integer> ans=new ArrayList<>();
-      if(root==null){
-          return ans;
-      }
-       
-        Queue<Node> q1=new LinkedList<>();
-        q1.add(root);
-        while(!q1.isEmpty()){
-            int c=q1.size();
-            for(int i=0;i<c;i++){
-                Node temp=q1.remove();
-                if(i==0){
-                    ans.add(temp.data);
-                }
-                if(temp.left!=null){
-                    q1.add(temp.left);
-                }
-                if(temp.right!=null){
-                    q1.add(temp.right);
-                }
-            }
-            
+      preOrder(root,0);
+       return ans;
+      
+    }
+     void preOrder(Node root,int level){
+        if(root==null){
+            return;
         }
-        return ans;
+        if(level==ans.size()){
+            ans.add(root.data);
+        }
+       
+        preOrder(root.left,level+1);
+         preOrder(root.right,level+1);
     }
 }
