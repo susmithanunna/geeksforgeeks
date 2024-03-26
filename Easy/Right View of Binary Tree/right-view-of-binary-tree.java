@@ -111,6 +111,8 @@ class GfG {
 // } Driver Code Ends
 
 
+
+
 //User function Template for Java
 
 
@@ -130,27 +132,21 @@ class Node
 
 class Solution{
     //Function to return list containing elements of right view of binary tree.
+    ArrayList<Integer> ans=new ArrayList<>();
     ArrayList<Integer> rightView(Node node) {
         //add code here.
-        ArrayList<Integer> a1=new ArrayList<>();
-        Queue<Node> q1=new LinkedList<>();
-        q1.add(node);
-        while(!q1.isEmpty()){
-            int size=q1.size();
-            for(int i=0;i<size;i++){
-                Node temp=q1.remove();
-                if(i==size-1){
-                    a1.add(temp.data);
-                }
-                if(temp.left!=null){
-                    q1.add(temp.left);
-                }
-                if(temp.right!=null){
-                    q1.add(temp.right);
-                }
-            }
+       preOrder(node,0);
+       return ans;
+    }
+    void preOrder(Node root,int level){
+        if(root==null){
+            return;
         }
-        return a1;
+        if(level==ans.size()){
+            ans.add(root.data);
+        }
+        preOrder(root.right,level+1);
+        preOrder(root.left,level+1);
     }
 }
 
