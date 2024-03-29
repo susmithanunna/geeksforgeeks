@@ -31,35 +31,35 @@ class Solution {
     // Function to find the number of islands.
     public int numIslands(char[][] grid) {
         // Code here
-        int vis[][]=new int[grid.length][grid[0].length];
         int c=0;
+        int vis[][]=new int[grid.length][grid[0].length];
         for(int i=0;i<grid.length;i++){
             for(int j=0;j<grid[i].length;j++){
                 if(vis[i][j]==0 && grid[i][j]=='1'){
-                   c++;
-                   dfs(i,j,vis,grid);
+                    c++;
+                    dfs(i,j,vis,grid);
                 }
             }
         }
         return c;
     }
     public void dfs(int row,int col,int vis[][],char grid[][]){
+        vis[row][col]=1;
         int n1=grid.length;
         int n2=grid[0].length;
-        vis[row][col]=1;
         for(int i=-1;i<=1;i++){
             for(int j=-1;j<=1;j++){
                 int delrow=row+i;
-                /*(row-1,col-1),(row-1,col),(row-1,col+1),
-                  (row,col-1),                (row,col+1),
-                  (row+1,col-1),(row+1,col),(row+1,col+!)*/
                 int delcol=col+j;
-                if((delrow>=0 && delrow<n1) && (delcol>=0 && delcol<n2)){
-                   if(grid[delrow][delcol]=='1' && vis[delrow][delcol]==0){
+                if(delrow>=0 && delrow<n1 && delcol>=0 && delcol<n2){
+                    if(grid[delrow][delcol]=='1' && vis[delrow][delcol]==0){
                         dfs(delrow,delcol,vis,grid);
-                   }
+                    }
                 }
             }
         }
     }
 }
+// public int numIslands(char[][] grid) {
+
+//         }
