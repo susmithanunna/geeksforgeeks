@@ -33,12 +33,17 @@ public class Main {
 class Solution {
     int findMaxSum(int arr[], int n) {
         // code here
-        int dp[]=new int[n+1];
-        dp[0]=0;
-        dp[1]=arr[0];
-        for(int i=2;i<=n;i++){
-            dp[i]=(int)Math.max(dp[i-1],dp[i-2]+arr[i-1]);
+        int dp[]=new int[n];
+        dp[0]=arr[0];
+        if(n==1){
+            return dp[0];
         }
-        return dp[n];
+        dp[1]=(int)Math.max(arr[0],arr[1]);
+        for(int i=2;i<n;i++){
+            int pick=arr[i]+dp[i-2];
+            int notpick=0+dp[i-1];
+            dp[i]=(int)Math.max(pick,notpick);
+        }
+       return dp[n-1];
     }
 }
