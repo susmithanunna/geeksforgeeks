@@ -136,25 +136,24 @@ class Solution
     public static int isSumProperty(Node root)
     {
         // add your code here
-        int left_data=0;
-        int right_data=0;
-        if(root==null || root.left==null && root.right==null){
+        //while(root!=null ){
+        if(root==null){
             return 1;
         }
-        else{
-            if(root.left!=null){
-                left_data=root.left.data;
-            }
-            if(root.right!=null){
-                right_data=root.right.data;
-            }
-            if((root.data==left_data+right_data)){
-               int left=isSumProperty(root.left); 
-               int right=isSumProperty(root.right);
-                return left&right;
-            }
-            return 0;
+        if(root.left==null && root.right==null ){
+                return 1;
         }
-        
+        int l=0;
+        int r=0;
+        if(root.left!=null){
+            l=l+root.left.data;
+        }
+        if(root.right!=null){
+            r=r+root.right.data;
+        }
+        if(l+r==root.data && isSumProperty(root.left)==1  && isSumProperty(root.right)==1){
+            return 1;
+        }
+        return 0;
     }
 }
