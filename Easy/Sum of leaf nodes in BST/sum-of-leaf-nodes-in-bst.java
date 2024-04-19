@@ -70,28 +70,21 @@ class Node
 }*/
 class Solution
 {
-    
     public static int sumOfLeafNodes(Node root)
     {
         // code here 
-        Queue<Node> q1=new LinkedList<>();
-        q1.add(root);
-        int sum=0;
-        while(!q1.isEmpty()){
-            Node temp=q1.remove();
-            if(temp.left==null && temp.right==null){
-                sum=sum+temp.data;
+         int sum=0;
+        sum=inorder(root,sum);
+        return sum;
+    }
+    public static  int inorder(Node root,int sum){
+        if(root!=null){
+            sum=inorder(root.left,sum);
+             if(root.left==null && root.right==null){
+                sum=sum+root.data;
             }
-            if(temp.left!=null){
-                q1.add(temp.left);
-            }
-            if(temp.right!=null){
-                q1.add(temp.right);
-            }
+            sum=inorder(root.right,sum);
         }
         return sum;
-        
-        
     }
-    
 }
