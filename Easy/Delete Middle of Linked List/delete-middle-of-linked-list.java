@@ -66,9 +66,7 @@ class Solution {
             s=s.next;
             f=f.next.next;
         }
-        //Node t1=s
         prev.next=s.next;
         return head;
-        
     }
 }
