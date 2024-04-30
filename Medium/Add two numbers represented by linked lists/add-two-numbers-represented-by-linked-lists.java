@@ -32,8 +32,8 @@ class GfG{
             int n = sc.nextInt();
             int val = sc.nextInt();
             
-            Node first = new Node(val);
-            Node tail = first;
+            Node num1 = new Node(val);
+            Node tail = num1;
             for(int i=0; i<n-1; i++)
             {
                 val = sc.nextInt();
@@ -44,8 +44,8 @@ class GfG{
             int m = sc.nextInt();
             val = sc.nextInt();
             
-            Node second = new Node(val);
-            tail = second;
+            Node num2 = new Node(val);
+            tail = num2;
             for(int i=0; i<m-1; i++)
             {
                 val = sc.nextInt();
@@ -54,7 +54,7 @@ class GfG{
             }
             
             Solution g = new Solution();
-            Node res = g.addTwoLists(first, second);
+            Node res = g.addTwoLists(num1, num2);
             printList(res);
         }
     }
@@ -79,13 +79,13 @@ class Node {
 
 class Solution{
     //Function to add two numbers represented by linked list.
-    static Node addTwoLists(Node first, Node second){
+    static Node addTwoLists(Node num1, Node num2){
         // code here
         // return head of sum list
-        int carry=0;
-        Node temp1=Reverse(first);
-        Node temp2=Reverse(second);
+        Node temp1=reverse(num1);
+        Node temp2=reverse(num2);
         Node ans=new Node(0);
+        int carry=0;
         Node a1=ans;
         int sum=0;
         while(temp1!=null && temp2!=null){
@@ -114,10 +114,14 @@ class Solution{
             ans.next=new Node(carry);
             ans=ans.next;
         }
-        a1=Reverse(a1.next);
+        a1=reverse(a1.next);
+        while(a1.next!=null && a1.data==0){
+            a1=a1.next;
+        }
         return a1;
+        
     }
-    static Node Reverse(Node head){
+    static Node reverse(Node head){
         Node prev=null;
         Node curr=head;
         Node nex;
@@ -126,8 +130,11 @@ class Solution{
             curr.next=prev;
             prev=curr;
             curr=nex;
+            
         }
         head=prev;
         return head;
     }
 }
+
+
