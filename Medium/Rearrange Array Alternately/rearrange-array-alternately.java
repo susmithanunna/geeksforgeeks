@@ -49,8 +49,6 @@ class Main {
 // } Driver Code Ends
 
 
-
-
 class Solution{
     
     // temp: input array
@@ -59,26 +57,23 @@ class Solution{
     public static void rearrange(long arr[], int n){
         
         // Your code here
-       if(n==1){
-           
-       }
-       else{
-           int i=0;
-           int j=n-1;
-           ArrayList<Long> a1=new ArrayList<>();
-           while(i!=j && i<j){
-               a1.add(arr[j]);
-               a1.add(arr[i]);
-               j--;
-               i++;
-           }
-           if(i==j){
-               a1.add(arr[j]);
-           }
-           for(int k=0;k<a1.size();k++){
-               arr[k]=a1.get(k);
-           }
-       }
+        int mini=0;
+        int maxi=n-1;
+        long max=arr[n-1]+1;
+        for(int i=0;i<n;i++){
+            if(i%2==0){
+                arr[i]=arr[i]+((arr[maxi]%max)*max);
+                maxi--;
+            }
+            else{
+                arr[i]=arr[i]+((arr[mini]%max)*max);
+                mini++;
+            }
+        }
+        for(int i=0;i<n;i++){
+            arr[i]=arr[i]/max;
+        }
+        
         
     }
     
