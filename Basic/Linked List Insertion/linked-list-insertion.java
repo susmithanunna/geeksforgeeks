@@ -64,32 +64,25 @@ class Solution
     Node insertAtBeginning(Node head, int x)
     {
         // code here
-        Node p=new Node(x);
-        if(head==null){
-            head=p;
-            return head;
-        }
-        p.next=head;
-        head=p;
-        return head;
+        Node temp=new Node(x);
+      
+         temp.next=head;
+        return temp;
     }
     
     //Function to insert a node at the end of the linked list.
     Node insertAtEnd(Node head, int x)
     {
         // code here
-        Node p=new Node(x);
         if(head==null){
-            head=p;
-            return head;
+            return new Node(x);
         }
-        
         Node temp=head;
         while(temp.next!=null){
             temp=temp.next;
         }
-        temp.next=p;
-
+        Node t1=new Node(x);
+        temp.next=t1;
         return head;
     }
 }
