@@ -37,8 +37,14 @@ class Solution{
     public static int kthSmallest(int[] arr, int l, int r, int k) 
     { 
         //Your code here
-       Arrays.sort(arr);
-       return arr[k-1];
-        
+        Arrays.sort(arr);
+        int c=1;
+        for(int i=l;i<=r;i++){
+            if(c==k){
+                return arr[i];
+            }
+            c++;
+        }
+        return -1;
     } 
 }
