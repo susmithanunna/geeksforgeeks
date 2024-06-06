@@ -40,18 +40,15 @@ class Solution{
         
         // Your code here
         long sum=0;
-        long max=Long.MIN_VALUE;
+        long maxsum=Integer.MIN_VALUE;
         for(int i=0;i<n;i++){
             sum=sum+arr[i];
-            if(max<sum){
-                max=sum;
-            }
+            maxsum=(long)Math.max(sum,maxsum);
             if(sum<0){
                 sum=0;
             }
         }
-        return max;
-        
+        return maxsum;
         
     }
     
