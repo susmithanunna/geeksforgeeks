@@ -1,10 +1,8 @@
 //{ Driver Code Starts
-//Initial Template for Java
+// Initial Template for Java
 
-
-
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
 
@@ -24,7 +22,7 @@ public class Main {
                 bolts[i] = (inputLine[i].charAt(0));
             }
 
-            new Solution().matchPairs(nuts, bolts, n);
+            new Solution().matchPairs(n, nuts, bolts);
             for (int i = 0; i < n; i++) {
                 System.out.print(nuts[i] + " ");
             }
@@ -40,14 +38,13 @@ public class Main {
 // } Driver Code Ends
 
 
-//User function Template for Java
-
-
+// User function Template for Java
 
 class Solution {
-    void matchPairs(char nuts[], char bolts[], int n) {
+    void matchPairs(int n, char nuts[], char bolts[]) {
         // code here
         Arrays.sort(nuts);
         Arrays.sort(bolts);
+        
     }
 }
