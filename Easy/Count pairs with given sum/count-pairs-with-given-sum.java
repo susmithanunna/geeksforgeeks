@@ -33,85 +33,20 @@ public class GFG {
 class Solution {
     int getPairsCount(int[] arr, int n, int k) {
         // code here
-        // Arrays.sort(arr);
-        // int i=0;
-        // int j=n-1;
-        // int c=0;
-        // while(i<j){
-        //     int sum=arr[i]+arr[j];
-        //     if(sum==k){
-        //         c++;
-        //         int l=i+1;
-        //         while(l<j && arr[i]==arr[l]){
-        //             c++;
-        //             l++;
-        //         }
-        //         int h=j-1;
-        //         while(h>i && arr[j]==arr[h]){
-        //             c++;
-        //             h--;
-        //         }
-        //         i=l;
-        //         j=h;
-        //     }
-        //     else if(sum<k){
-        //         i++;
-        //     }
-        //     else{
-        //         j--;
-        //     }
-            
-            
-        // }
-        // return c;
-        // Arrays.sort(arr);
-        // int i = 0;
-        // int j = n - 1;
-        // int count = 0;
-
-        // while (i < j) {
-        //     int sum = arr[i] + arr[j];
-
-        //     if (sum == k) {
-        //         count++;
-
-        //         // Handling duplicates for arr[i]
-        //         int left = i + 1;
-        //         while (left < j && arr[left] == arr[i]) {
-        //             count++;
-        //             left++;
-        //         }
-
-        //         // Handling duplicates for arr[j]
-        //         int right = j - 1;
-        //         while (right > i && arr[right] == arr[j]) {
-        //             count++;
-        //             right--;
-        //         }
-
-        //         i = left;
-        //         j = right;
-        //     } else if (sum < k) {
-        //         i++;
-        //     } else {
-        //         j--;
-        //     }
-        // }
-
-        // return count;
-        //Arrays.sort(arr);
-        HashMap<Integer,Integer> h=new HashMap<>();
-        Integer c;
-        int count=0;
-        for(int i:arr){
-            int x=i;
-            int y=k-x;
-            if(h.containsKey(y)){
-                count=count+h.get(y);
+        HashMap<Integer,Integer> h1=new HashMap<>();
+        int c=0;
+        for(int i=0;i<n;i++){
+            int t=k-arr[i];
+            if(h1.containsKey(t)){
+                c=c+h1.get(t);
             }
-            h.put(i,h.getOrDefault(i,0)+1);
+            if(h1.get(arr[i])!=null){
+                h1.put(arr[i],h1.get(arr[i])+1);
+            }
+            else{
+                h1.put(arr[i],1);
+            }
         }
-        return count;
-
+        return c;
     }
 }
