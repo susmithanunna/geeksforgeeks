@@ -36,27 +36,17 @@ class GFG
 class Solution{
     static long maximumSumSubarray(int K, ArrayList<Integer> Arr,int N){
         // code here
-        //Collections.sort(Arr);
+        long max=0;
         long sum=0;
-        int c=0;
-        long max=Integer.MAX_VALUE;
         for(int i=0;i<K;i++){
             sum=sum+Arr.get(i);
         }
-        max=sum;
-        //System.out.println(max);
+        max=(int)Math.max(sum,max);
         for(int i=K;i<N;i++){
             sum=sum-Arr.get(i-K);
             sum=sum+Arr.get(i);
-            max=(long)Math.max(max,sum);
-            
+            max=(long)Math.max(sum,max);
         }
-       
         return max;
-        /*The code is sorting the array instead of finding the maximum sum of subarrays.
-        To fix it, you need to implement a sliding window approach to find the maximum sum.
-        Start by calculating the sum of the first K elements. Then, iterate through the array 
-        and subtract the previous element and add the current element to the sum. 
-        Update the maximum sum if the current sum is greater. Finally, return the maximum sum.*/
     }
 }
