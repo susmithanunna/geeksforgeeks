@@ -1,23 +1,20 @@
 //{ Driver Code Starts
-//Initial Template for Java
+// Initial Template for Java
 
 import java.io.*;
 import java.util.*;
 
-class GFG{
-    public static void main(String args[])throws IOException
-    {
+class GFG {
+    public static void main(String args[]) throws IOException {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
-        while(t-- > 0){
+        while (t-- > 0) {
             int n = sc.nextInt();
             int m = sc.nextInt();
             int mat[][] = new int[n][m];
-            for(int i=0;i<n;i++)
-            {
-                for(int j=0;j<m;j++)
-                {
-                    mat[i][j]=sc.nextInt();
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    mat[i][j] = sc.nextInt();
                 }
             }
             Solution ob = new Solution();
@@ -28,25 +25,21 @@ class GFG{
 // } Driver Code Ends
 
 
-//User function Template for Java
+// User function Template for Java
 
-class Solution{
-    static int maxSquare(int n, int m, int mat[][]){
+class Solution {
+    static int maxSquare(int n, int m, int mat[][]) {
         // code here
-                int max=0;
+        int max=0;
         int dp[][]=new int[n][m];
         for(int i=0;i<n;i++){
             dp[i][0]=mat[i][0];
-             max=(int)Math.max(max,dp[i][0]);
-                
+            max=(int)Math.max(dp[i][0],max);
         }
         for(int j=0;j<m;j++){
             dp[0][j]=mat[0][j];
-             max=(int)Math.max(max,dp[0][j]);
-                
+           max=(int)Math.max(dp[0][j],max);
         }
-
-        
         for(int i=1;i<n;i++){
             for(int j=1;j<m;j++){
                 if(mat[i][j]==1){
