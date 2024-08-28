@@ -1,78 +1,55 @@
 //{ Driver Code Starts
-//Initial Template for Java
+// Initial Template for Java
 
-import java.util.*;
-import java.lang.*;
 import java.io.*;
+import java.lang.*;
+import java.util.*;
 
-class GFG {
-	public static void main(String[] args) throws IOException
-	{
+public class Main {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine().trim());
-        while(t-->0)
-        {
-            StringTokenizer stt = new StringTokenizer(br.readLine());
-            
-            int n = Integer.parseInt(stt.nextToken());
-            int m = Integer.parseInt(stt.nextToken());
-            // int n = Integer.parseInt(br.readLine().trim());
-            int a[] = new int[n];
-            String inputLine[] = br.readLine().trim().split(" ");
-            for (int i = 0; i < n; i++) {
-                a[i] = Integer.parseInt(inputLine[i]);
-            }
-            
-            Solution obj = new Solution();
-            System.out.println(obj.smallestSubWithSum(a, n, m));
-        }
-	}
-}
+        int T = Integer.parseInt(br.readLine().trim());
 
+        while (T > 0) {
+            int x = Integer.parseInt(br.readLine().trim());
+            String[] input = br.readLine().trim().split(" ");
+            int[] arr = Arrays.stream(input).mapToInt(Integer::parseInt).toArray();
+
+            Solution solution = new Solution();
+            System.out.println(solution.smallestSubWithSum(x, arr));
+
+            T--;
+        }
+    }
+}
 
 // } Driver Code Ends
 
 
-//User function Template for Java
-
+// User function Template for Java
 
 class Solution {
 
-    public static int smallestSubWithSum(int a[], int n, int x) {
-        // Your code goes here 
-        int r=0;
-	    int l=0;
-	    int sum=0;
-	    int min=Integer.MAX_VALUE;
-	    while(r<n){
-	        if(sum<=x){
-	            sum=sum+a[r];
-	            r++;
-	        }
-	        else if(sum>x){
-	            min=(int)Math.min(r-l,min);
-	            while(sum>x){
-	                sum=sum-a[l];
-	                l++;
-	                if(sum>x)
-	                min=(int)Math.min(r-l,min);
-	            }
-	        }
-	    }
-	    //System.out.println(sum);
-	    if(sum>x){
-	        min=(int)Math.min(r-l,min);
-	            while(sum>x){
-	                sum=sum-a[l];
-	                l++;
-	                if(sum>x)
-	                min=(int)Math.min(r-l,min);
-	            }
-	    }
-	    if(min==Integer.MAX_VALUE){
-	        return 0;
-	    }
-	    return min;
+    public static int smallestSubWithSum(int x, int[] arr) {
+        // Your code goes here
+        int min=Integer.MAX_VALUE;
+        int i=0;
+        int j=0;
+        int n=arr.length;
+        int sum=0;
+       while(j<n){
+            sum=sum+arr[j];
+            if(sum>x){
+                min=(int)Math.min(min,j-i+1);
+                while(sum>x && i<n && i<=j){
+                    min=(int)Math.min(min,j-i+1);
+                    sum=sum-arr[i];
+                    i++;
+                }
+                
+            }
+            j++;
+        }
+        return min==Integer.MAX_VALUE?0:min;
     }
 }
-
