@@ -22,13 +22,26 @@ class GFG {
 class Solution {
     public long nthStair(int n) {
         // Code here
-        int dp[]=new int[n+1];
-        dp[0]=1;
-        for(int i=1;i<=2;i++){
-            for(int j=i;j<=n;j++){
-                dp[j]=dp[j]+dp[j-i];
+      
+       if(n==1){
+           return 1;
+       }
+       else if(n==2){
+           return 2;
+       }
+        long dp[]=new long[n+1];
+        dp[0]=0;
+        dp[1]=1;
+        dp[2]=2;
+        for(int i=3;i<=n;i++){
+            if(i%2==0){
+                dp[i]=dp[i-1]+1;
+            }
+            else{
+                dp[i]=dp[i-1];
             }
         }
         return dp[n];
+        
     }
 }
