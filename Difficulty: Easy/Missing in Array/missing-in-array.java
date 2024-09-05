@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.*;
 
 class GFG {
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -31,14 +32,15 @@ class Solution {
     int missingNumber(int n, int arr[]) {
 
         // Your Code Here
-        int sum=0;
-        int ac=0;
-        for(int i=0;i<n-1;i++){
-            sum=sum+arr[i];
-            ac=ac+(i+1);
-            //System.out.println(ac+" "+sum);
+        int ans=0;
+        int t=1;
+        for(int i=0;i<arr.length;i++){
+            ans=ans^arr[i];
+            ans=ans^t;
+            //System.out.println(ans+" "+arr[i]+" "+t);
+            t++;
         }
-        ac=ac+n;
-        return ac-sum;
+        ans=ans^t;
+        return ans;
     }
 }
