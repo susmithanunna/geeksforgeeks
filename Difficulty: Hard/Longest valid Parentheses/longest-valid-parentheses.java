@@ -23,32 +23,39 @@ class GFG{
 //User function Template for Java
 
 class Solution{
-    static int maxLength(String s){
-        // code here
-        Stack<Integer> s1=new Stack<>();
-        int max=0;
-        int c=0;
-        int last=s.length();
-        for(int i=0;i<s.length();i++){
-            if(s.charAt(i)=='(' ){
-                s1.add(i);
-                
-            }
-           else if(!s1.isEmpty() && s.charAt(s1.peek())=='('){
-            s1.pop();
+    static int maxLength(String S){
+         int left=0;
+       int right=0;
+       int maxi=0;
+       
+       for(int i=0;i<S.length();i++){
+           if(S.charAt(i)=='(')  left++;
+           else right++;
+           
+           if(left==right) {
+               maxi=(int)Math.max(maxi,left*2);
            }
-           else {
-            s1.add(i);
+           else if (left<right){
+               left=0;
+               right=0;
            }
-                
-        }
-       //System.out.println(s1.size());
-        while(!s1.isEmpty()){
-          int t=s1.pop();
-          int temp=last-t-1;
-          max=(int)Math.max(temp,max);
-          last=t;
-        }
-        return (int)Math.max(last,max);
+       }
+       
+       left=0;
+       right=0;
+       
+       for(int i=S.length()-1;i>=0;i--){
+           if(S.charAt(i)=='(')  left++;
+           else right++;
+           
+           if(left==right) {
+               maxi=(int)Math.max(maxi,left*2);
+           }
+           else if (left>right){
+               left=0;
+               right=0;
+           }
+       }
+       return maxi;
     }
 }
