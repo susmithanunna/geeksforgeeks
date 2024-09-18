@@ -35,35 +35,34 @@ class Driverclass
 class Solution
 {
     //Function to check if brackets are balanced or not.
-    static boolean ispar(String s)
+    static boolean ispar(String x)
     {
         // add your code here
         Stack<Character> s1=new Stack<>();
-        int f=0;
-        for(int i=0;i<s.length();i++){
-            if(s.charAt(i)=='(' || s.charAt(i)=='['|| s.charAt(i)=='{'){
-                s1.add(s.charAt(i));
-                f=1;
-            }
-            else if(!s1.isEmpty() && s.charAt(i)==')' && s1.peek()=='('){
-                s1.pop();
-            }
-            else if(!s1.isEmpty() && s.charAt(i)=='}'&& s1.peek()=='{')
-            {
-                s1.pop();
-            }
-            else if(!s1.isEmpty() && s.charAt(i)==']' && s1.peek()=='['){
-                s1.pop();
+        for(int i=0;i<x.length();i++){
+            if(x.charAt(i)=='{' || x.charAt(i)=='[' || x.charAt(i)=='('){
+                s1.add(x.charAt(i));
             }
             else{
-                return false;
+                char ch=x.charAt(i);
+                if(s1.size()==0){
+                    return false;
+                }
+                else if(ch=='}' && s1.peek()!='{'){
+                    return false;
+                }
+            
+                else if(ch==']' && s1.peek()!='['){
+                    return false;
+                }
+                else if(ch==')' && s1.peek()!='('){
+                    return false;
+                }
+                else{
+                    s1.pop();
+                }
             }
         }
-        //System.out.println(s1.size());
-        if(s1.size()==0 && f==1){
-            return true;
-        }
-        return false;
+        return s1.size()==0?true:false;
     }
 }
-// {}{(}))}
