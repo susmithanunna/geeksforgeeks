@@ -44,31 +44,15 @@ class GFG {
 class Solution {
     public static int kthSmallest(int[] arr, int k) {
         // Your code here
-        int max=Integer.MIN_VALUE;
-        for(int i=0;i<arr.length;i++){
-            max=(int)Math.max(arr[i],max);
-        }
-        //System.out.println("max "+max);
-        int a1[]=new int[max+1];
-        for(int i=0;i<arr.length;i++){
-            a1[arr[i]]=1+a1[arr[i]];
-        }
-        
-        for(int i=1;i<=max;i++){
-            //System.out.print(a1[i]+" ");
-            if(k==0){
-                return i-1;
-            }
-            else{
-                if(a1[i]!=0){
-                    k--;
-                }
+        int n=arr.length;
+        PriorityQueue<Integer> pq=new PriorityQueue<>((x,y)->Integer.compare(y,x));
+        for(int i=0;i<n;i++){
+            pq.add(arr[i]);
+            if(pq.size()>k){
+                pq.remove();
             }
         }
-        if(k==0){
-            return max;
-        }
-        return -1;
-        
+       
+        return pq.peek();
     }
 }
