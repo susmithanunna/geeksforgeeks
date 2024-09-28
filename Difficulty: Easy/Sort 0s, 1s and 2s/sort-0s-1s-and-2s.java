@@ -35,35 +35,32 @@ class Solution {
     // Function to sort an array of 0s, 1s, and 2s
     public void sort012(ArrayList<Integer> arr) {
         // code here
-        int zc=0;
-        int tc=0;
         int oc=0;
+        int tc=0;
+        int zc=0;
         for(int i=0;i<arr.size();i++){
-            if(arr.get(i)==0){
-                zc++;
-            }
-            else if(arr.get(i)==1){
+            if(arr.get(i)==1){
                 oc++;
             }
-            else{
+            else if(arr.get(i)==2){
                 tc++;
             }
+            else{
+                zc++;
+            }
         }
-        int i=0;
-        while(zc!=0){
-            arr.set(i,0);
-            zc--;
-            i++;
+        int k=0;
+        for(int i=0;i<zc;i++){
+            arr.set(k,0);
+            k++;
         }
-        while(oc!=0){
-            arr.set(i,1);
-            oc--;
-            i++;
+        for(int i=0;i<oc;i++){
+            arr.set(k,1);
+            k++;
         }
-        while(tc!=0){
-            arr.set(i,2);
-            tc--;
-            i++;
+        for(int i=0;i<tc;i++){
+            arr.set(k,2);
+            k++;
         }
     }
 }
