@@ -112,41 +112,38 @@ class Solution {
     // values of both the BST in a sorted order.
     public List<Integer> merge(Node root1, Node root2) {
         // Write your code here
-        List<Integer> a1=new ArrayList<>();
-        List<Integer> a2=new ArrayList<>();
-        inorder(root1,a1);
-        inorder(root2,a2);
+        List<Integer> ans=new ArrayList<>();
+        List<Integer> in1=new ArrayList<>();
+        List<Integer> in2=new ArrayList<>();
+        findInorder(root1,in1);
+        findInorder(root2,in2);
         int i=0;
         int j=0;
-        List<Integer> ans=new ArrayList<>();
-        while(i<a1.size() && j<a2.size()){
-            if(a1.get(i)<a2.get(j)){
-                ans.add(a1.get(i));
+        while(i<in1.size() && j<in2.size()){
+            if(in1.get(i)<=in2.get(j)){
+                ans.add(in1.get(i));
                 i++;
             }
             else{
-                ans.add(a2.get(j));
+                ans.add(in2.get(j));
                 j++;
             }
         }
-        while(i<a1.size()){
-            ans.add(a1.get(i));
+        while(i<in1.size()){
+            ans.add(in1.get(i));
             i++;
-            
         }
-         while(j<a2.size()){
-            ans.add(a2.get(j));
+        while(j<in2.size()){
+            ans.add(in2.get(j));
             j++;
-            
         }
         return ans;
     }
-    public void inorder(Node root,List<Integer> a){
-        if(root==null){
-            return;
+    public void findInorder(Node root,List<Integer> a){
+        if(root!=null){
+            findInorder(root.left,a);
+            a.add(root.data);
+            findInorder(root.right,a);
         }
-        inorder(root.left,a);
-        a.add(root.data);
-        inorder(root.right,a);
     }
 }
