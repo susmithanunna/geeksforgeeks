@@ -30,7 +30,9 @@ class GFG {
 			    System.out.println("No");
 			}
 			t--;
-		}
+		
+System.out.println("~");
+}
 	}
 	
 }
@@ -45,38 +47,53 @@ class Solution {
     {
         // Your Code goes here
         ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
+        
         for(int i=0;i<N;i++){
             adj.add(new ArrayList<>());
         }
+        int vis[]=new int[N];
+        int pathvis[]=new int[N];
         for(int i=0;i<P;i++){
-            adj.get(prerequisites[i][0]).add(prerequisites[i][1]);
+            int u=prerequisites[i][0];
+            int v=prerequisites[i][1];
+            adj.get(u).add(v);
+          
         }
-        boolean path[]=new boolean[N];
-        boolean vis[]=new boolean[N];
         for(int i=0;i<N;i++){
-            if(!vis[i]){
-                if(dfs(i,path,vis,adj)){
+            if(vis[i]==0){
+                if(bfs(i,adj,vis,pathvis)){
                     return false;
                 }
             }
         }
+        
         return true;
     }
-    public boolean dfs(int v,boolean path[],boolean vis[],ArrayList<ArrayList<Integer>> adj){
-        vis[v]=true;
-        path[v]=true;
-        for(int it:adj.get(v)){
-            if(!vis[it]){
-                if(dfs(it,path,vis,adj)){
-                    return true;
-                }
-            }
-            if(path[it]){
+    public boolean bfs(int i,ArrayList<ArrayList<Integer>> adj,int vis[],int pathvis[]){
+        vis[i]=1;
+   
+    pathvis[i]=1;
+    for(int it:adj.get(i)){
+        if(vis[it]==0){
+            if(bfs(it,adj,vis,pathvis)){
                 return true;
             }
         }
-        path[v]=false;
-        return false;
+        else if(pathvis[it]==1){
+            return true;
+        }
+    }
+    pathvis[i]=0;
+    return false;
+        
     }
     
+}
+class Pair{
+    int node;
+    int parent;
+    Pair(int node,int parent){
+        this.node=node;
+        this.parent=parent;
+    }
 }
