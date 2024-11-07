@@ -2,44 +2,29 @@
 import java.io.*;
 import java.util.*;
 
-class IntArray {
-    public static int[] input(BufferedReader br, int n) throws IOException {
-        String[] s = br.readLine().trim().split(" ");
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) a[i] = Integer.parseInt(s[i]);
+class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(read.readLine().trim());
 
-        return a;
-    }
-
-    public static void print(int[] a) {
-        for (int e : a) System.out.print(e + " ");
-        System.out.println();
-    }
-
-    public static void print(ArrayList<Integer> a) {
-        for (int e : a) System.out.print(e + " ");
-        System.out.println();
-    }
-}
-
-class GFG {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t;
-        t = Integer.parseInt(br.readLine());
         while (t-- > 0) {
+            String line = read.readLine().trim();
+            String[] numsStr = line.split(" ");
+            int[] nums = new int[numsStr.length];
+            for (int i = 0; i < numsStr.length; i++) {
+                nums[i] = Integer.parseInt(numsStr[i]);
+            }
 
-            String str[] = br.readLine().trim().split(" ");
+            int d = Integer.parseInt(read.readLine().trim());
 
-            int n = Integer.parseInt(str[0]);
-            int s = Integer.parseInt(str[1]);
-
-            int[] arr = IntArray.input(br, n);
-
-            Solution obj = new Solution();
-            ArrayList<Integer> res = obj.subarraySum(arr, n, s);
-
-            IntArray.print(res);
+            Solution ob = new Solution();
+            ArrayList<Integer> result = ob.subarraySum(nums, d);
+            // Print all elements in the result list
+            for (int i : result) {
+                System.out.print(i + " ");
+            }
+            System.out.println(); // Print a new line after the result
+            System.out.println("~");
         }
     }
 }
@@ -49,52 +34,38 @@ class GFG {
 
 
 class Solution {
-    public static ArrayList<Integer> subarraySum(int[] arr, int n, int s) {
+    static ArrayList<Integer> subarraySum(int[] arr, int target) {
         // code here
-        int l=0;
-        int r=0;
+        int n=arr.length;
+        int i=0;
+        int j=0;
         int sum=0;
-        
         ArrayList<Integer> ans=new ArrayList<>();
-       
-        while(r<n){
-            sum=sum+arr[r];
-            //System.out.println("sum "+sum);
-            
-             while(sum>s && l<=r){
-                   //System.out.println("inside");
-                sum=sum-arr[l];
-                l++;
-            }
-            if(sum==s && l<=r){
-               // System.out.println(l+" "+r);
-                ans.add(l+1);
-                ans.add(r+1);
+        while(j<n){
+            sum=sum+arr[j];
+            if(sum==target){
+                ans.add(i+1);
+                ans.add(j+1);
                 return ans;
             }
-           r++;
-        }
-          if(s==0){
-            ans.add(-1);
-            return ans;
-        }
-        while(sum>s && l<r){
-            sum=sum-arr[l];
-            l++;
-            if(sum==s){
-                ans.add(l+1);
-                ans.add(r);
-                return ans;
+            else if(sum>target){
+                while(sum>target){
+                    sum=sum-arr[i];
+                    i++;
+                }
+                if(sum==target){
+                    ans.add(i+1);
+                    ans.add(j+1);
+                    return ans;
+                }
             }
+            j++;
             
-        }
-        if(s==sum){
-            ans.add(l);
-            ans.add(r);
         }
         if(ans.size()==0){
             ans.add(-1);
         }
         return ans;
+        
     }
 }
