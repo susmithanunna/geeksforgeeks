@@ -1,77 +1,70 @@
 //{ Driver Code Starts
-//Initial Template for Java
-
-/*package whatever //do not write package name here */
-
 import java.io.*;
 import java.util.*;
 
+class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(read.readLine().trim()); // Read number of test cases
 
-class Array {
-    
-    // Driver code
-	public static void main (String[] args) throws IOException{
-		// Taking input using buffered reader
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		int testcases = Integer.parseInt(br.readLine());
-		
-		// looping through all testcases
-		while(testcases-- > 0){
-		    String line = br.readLine();
-		    String[] element = line.trim().split("\\s+");
-		    int sizeOfArray = Integer.parseInt(element[0]);
-		    int K = Integer.parseInt(element[1]);
-		    
-		    int arr [] = new int[sizeOfArray];
-		    
-		    line = br.readLine();
-		    String[] elements = line.trim().split("\\s+");
-		    for(int i = 0;i<sizeOfArray;i++){
-		        arr[i] = Integer.parseInt(elements[i]);
-		    }
-		    
-		    Solution obj = new Solution();
-		    int res = obj.lenOfLongSubarr(arr, sizeOfArray, K);
-		    
-		    System.out.println(res);
-		}
-	}
+        while (t-- > 0) {
+            String line = read.readLine().trim(); // Read the array input
+            String[] numsStr = line.split(" ");   // Split the input string by spaces
+            int[] nums =
+                new int[numsStr.length]; // Convert string array to integer array
+            for (int i = 0; i < numsStr.length; i++) {
+                nums[i] = Integer.parseInt(numsStr[i]);
+            }
+
+            int k = Integer.parseInt(read.readLine().trim()); // Read target sum
+
+            Solution ob = new Solution();
+            int ans =
+                ob.lenOfLongestSubarr(nums, k); // Call the function and store result
+            System.out.println(ans);
+            System.out.println("~");
+        }
+    }
 }
-
-
 
 // } Driver Code Ends
 
 
-//User function Template for Java
+// User function Template for Java
 
-class Solution{
-    
-   
-    // Function for finding maximum and value pair
-    public static int lenOfLongSubarr (int A[], int N, int K) {
-        //Complete the functionh
-        int max=0;
+class Solution {
+    public int lenOfLongestSubarr(int[] arr, int k) {
+        // code here
+        int n=arr.length;
+        int i=0;
+        int j=0;
         int sum=0;
-        HashMap<Integer,Integer> h1=new HashMap<>();
-        for(int i=0;i<N;i++){
-            sum=sum+A[i];
-            if(sum==K){
-                max=(int)Math.max(max,i+1);
+        int max=0;
+        boolean flag=false;
+        while(j<n){
+            sum=sum+arr[j];
+            while(sum>k && i<j){
+                sum=sum-arr[i];
+                i++;
             }
-            if(h1.containsKey(sum-K)){
-                int index=h1.get(sum-K);
-                max=(int)Math.max(max,i-index);
+            if(sum==k){
+                max=(int)Math.max(j-i+1,max);
+                
             }
-            if(!h1.containsKey(sum)){
-                h1.put(sum,i);
+            if(arr[i]==k){
+                flag=true;
             }
+            
+            j++;
         }
-        return max;
+        while(i<n){
+            sum=sum-arr[i];
+            if(sum==k){
+                max=(int)Math.max(j-i+1,max);
+                
+            }
+            i++;
+        }
+        return max==0?(flag==true?1:0):max;
     }
-    
-    
 }
-
-
