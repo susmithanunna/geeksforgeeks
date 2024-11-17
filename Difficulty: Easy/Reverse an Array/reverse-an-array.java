@@ -19,6 +19,7 @@ public class Main {
                 System.out.print(arr[i] + " ");
             }
             System.out.println();
+            System.out.println("~");
         }
     }
 }
@@ -29,10 +30,15 @@ class Solution {
     public void reverseArray(int arr[]) {
         // code here
         int n=arr.length;
-        for(int i=0;i<n/2;i++){
-            int t=arr[n-i-1];
-            arr[n-i-1]=arr[i];
-            arr[i]=t;
+        int i=0;
+        int j=n-1;
+        while(i<j){
+            int t=arr[i];
+            arr[i]=arr[j];
+            arr[j]=t;
+            i++;
+            j--;
         }
+        
     }
 }
