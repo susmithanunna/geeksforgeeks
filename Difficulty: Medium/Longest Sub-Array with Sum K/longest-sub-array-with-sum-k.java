@@ -36,35 +36,19 @@ class Solution {
     public int lenOfLongestSubarr(int[] arr, int k) {
         // code here
         int n=arr.length;
-        int i=0;
-        int j=0;
+        HashMap<Integer,Integer> h1=new HashMap<>();
+        h1.put(0,-1);
         int sum=0;
         int max=0;
-        boolean flag=false;
-        while(j<n){
-            sum=sum+arr[j];
-            while(sum>k && i<j){
-                sum=sum-arr[i];
-                i++;
+        for(int i=0;i<n;i++){
+            sum=sum+arr[i];
+            if(h1.containsKey(sum-k)){
+                max=(int)Math.max(max,i-h1.get(sum-k));
             }
-            if(sum==k){
-                max=(int)Math.max(j-i+1,max);
-                
+            if(!h1.containsKey(sum)){
+                h1.put(sum,i);
             }
-            if(arr[i]==k){
-                flag=true;
-            }
-            
-            j++;
         }
-        while(i<n){
-            sum=sum-arr[i];
-            if(sum==k){
-                max=(int)Math.max(j-i+1,max);
-                
-            }
-            i++;
-        }
-        return max==0?(flag==true?1:0):max;
+        return max;
     }
 }
