@@ -29,6 +29,8 @@ public class GFG {
             int key = Integer.parseInt(in.readLine().trim());
 
             out.println(new Solution().search(arr, key));
+
+            out.println("~");
         }
         out.close();
     }
@@ -41,31 +43,35 @@ public class GFG {
 class Solution {
     int search(int[] arr, int key) {
         // Complete this function
-        int ans=-1;
         int n=arr.length;
-        int l=0;
-        int r=n-1;
-        while(l<=r){
-            int mid=(r+l)/2;
+        int minindex=-1;
+        if(arr[0]<arr[1] && arr[0]<arr[n-1]){
+            minindex=0;
+        }
+        for(int i=1;i<n;i++){
+            if(i+1<n && arr[i-1]>=arr[i] && arr[i+1]>=arr[i]){
+                minindex=i;
+            }
+        }
+        if(arr[n-1]<=arr[n-2] && arr[n-1]<arr[0]){
+            minindex=n-1;
+        }
+      //  System.out.println(minindex);
+        int t1=binarysearch(arr,key,0,minindex-1);
+       int t2=binarysearch(arr,key,minindex,n-1);
+        return t1==-1?t2:t1;
+    }
+    public int binarysearch(int arr[],int key,int low,int high){
+        while(low<=high){
+            int mid=(low+high)/2;
             if(arr[mid]==key){
                 return mid;
             }
-            if(arr[l]<=arr[mid]){
-                if(key>=arr[l]&&key<=arr[mid])
-                r=mid-1;
-                else{
-                    l=mid+1;
-                }
-               
+            else if(arr[mid]<key){
+                low=mid+1;
             }
-            else
-            {
-                if(key>=arr[mid]&&key<=arr[r]){
-                    l=mid+1;
-                }
-                else{
-                    r=mid-1;
-                }
+            else{
+                high=mid-1;
             }
         }
         return -1;
