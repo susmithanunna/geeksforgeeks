@@ -13,19 +13,20 @@ class GFG {
             int k = Integer.parseInt(br.readLine().trim());
 
             String[] line1 = br.readLine().trim().split(" ");
-            int[] arr1 = new int[line1.length];
+            int[] a = new int[line1.length];
             for (int i = 0; i < line1.length; i++) {
-                arr1[i] = Integer.parseInt(line1[i]);
+                a[i] = Integer.parseInt(line1[i]);
             }
 
             String[] line2 = br.readLine().trim().split(" ");
-            int[] arr2 = new int[line2.length];
+            int[] b = new int[line2.length];
             for (int i = 0; i < line2.length; i++) {
-                arr2[i] = Integer.parseInt(line2[i]);
+                b[i] = Integer.parseInt(line2[i]);
             }
 
             Solution ob = new Solution();
-            System.out.println(ob.kthElement(k, arr1, arr2));
+            System.out.println(ob.kthElement(a, b, k));
+            System.out.println("~");
         }
     }
 }
@@ -36,43 +37,44 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    public long kthElement(int k, int arr1[], int arr2[]) {
+    public int kthElement(int a[], int b[], int k) {
         // code here
+        int n1=a.length;
+        int n2=b.length;
         int i=0;
         int j=0;
-        int n1=arr1.length;
-        int n2=arr2.length;
-        while(i<n1 && j<n2){
-            if(arr1[i]<=arr2[j]){
-                k--;
-                if(k==0){
-                    return arr1[i];
+        while(i<n1 && j<n2 && k!=0){
+            if(a[i]<b[j]){
+                if(k==1){
+                    return a[i];
                 }
                 i++;
+                
+                
             }
-            else if(arr1[i]>=arr2[j]){
-                k--;
-                if(k==0){
-                    return arr2[j];
+            else{
+                if(k==1){
+                    return b[j];
                 }
                 j++;
+               
             }
-            
-        }
-        while(i<n1){
             k--;
-            if(k==0){
-                return arr1[i];
+        }
+        while(i<n1 && k!=0){
+            if(k==1){
+                return a[i];
             }
             i++;
-        }
-        while(j<n2){
             k--;
-            if(k==0){
-                return arr2[j];
+        }
+         while(j<n2 && k!=0){
+            if(k==1){
+                return b[j];
             }
             j++;
+            k--;
         }
-        return 0;
+        return (int)Math.min(a[i],b[j]);
     }
 }
