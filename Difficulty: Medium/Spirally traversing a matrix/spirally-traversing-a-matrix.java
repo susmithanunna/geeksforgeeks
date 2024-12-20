@@ -20,6 +20,8 @@ class GFG {
             ArrayList<Integer> ans = ob.spirallyTraverse(matrix);
             for (Integer val : ans) System.out.print(val + " ");
             System.out.println();
+
+            System.out.println("~");
         }
     }
 }
@@ -28,37 +30,38 @@ class GFG {
 
 class Solution {
     // Function to return a list of integers denoting spiral traversal of matrix.
-    public ArrayList<Integer> spirallyTraverse(int matrix[][]) {
+    public ArrayList<Integer> spirallyTraverse(int mat[][]) {
         // code here
-        int r=matrix.length;
-        int c=matrix[0].length;
-         int top=0;
-        int bottom=r-1;
+        int n=mat.length;
+        int m=mat[0].length;
+        ArrayList<Integer> ans=new ArrayList<>();
         int left=0;
-        int right=c-1;
-        ArrayList<Integer> l1=new ArrayList<>();
+        int right=m-1;
+        int top=0;
+        int bottom=n-1;
         while(top<=bottom && left<=right){
-        for(int i=left;i<=right;i++){
-            l1.add(matrix[top][i]);
+
+            for(int i=left;i<=right;i++){
+                ans.add(mat[top][i]);
+            }
+            top++;
+            for(int i=top;i<=bottom;i++){
+                ans.add(mat[i][right]);
+            }
+            right--;
+            if(top<=bottom){
+                for(int i=right;i>=left;i--){
+                    ans.add(mat[bottom][i]);
+                }
+                bottom--;
+            }
+            if(left<=right){
+                for(int i=bottom;i>=top;i--){
+                    ans.add(mat[i][left]);
+                }
+                left++;
+            }
         }
-        top++;
-        for(int i=top;i<=bottom;i++){
-            l1.add(matrix[i][right]);
-        }
-        right--;
-        if(top<=bottom){
-        for(int i=right;i>=left;i--){
-            l1.add(matrix[bottom][i]);
-        }}
-        bottom--;
-        if(left<=right){
-        for(int i=bottom;i>=top;i--){
-            l1.add(matrix[i][left]);
-        }
-        }
-        left++;
-        }
-        return l1;
-        
+        return ans;
     }
 }
