@@ -18,7 +18,9 @@ public class Main {
             Solution ob = new Solution();
             int[] ans = ob.getFloorAndCeil(x, arr);
             System.out.println(ans[0] + " " + ans[1]);
-        }
+        
+System.out.println("~");
+}
     }
 }
 
@@ -33,34 +35,45 @@ class Solution {
         Arrays.sort(arr);
         int ans[]=new int[2];
         int n=arr.length;
+        int floor=-1;
+        int ceil=-1;
         int low=0;
         int high=n-1;
-        int a1=-1;
         while(low<=high){
             int mid=(low+high)/2;
             if(arr[mid]<=x){
-                a1=arr[mid];
+                floor=mid;
                 low=mid+1;
             }
-            else{
+            else if(arr[mid]>x){
                 high=mid-1;
             }
         }
-        ans[0]=a1;
-        int a2=-1;
         low=0;
         high=n-1;
         while(low<=high){
             int mid=(low+high)/2;
             if(arr[mid]>=x){
-                a2=arr[mid];
+                ceil=mid;
                 high=mid-1;
             }
-            else{
+            else if(arr[mid]<x){
                 low=mid+1;
             }
         }
-        ans[1]=a2;
+      //  System.out.println(floor+" "+ceil);
+       if(floor!=-1){
+            ans[0]=arr[floor];
+       }
+       else{
+           ans[0]=-1;
+       }
+        if(ceil!=-1){
+            ans[1]=arr[ceil];
+        }
+        else{
+            ans[1]=-1;
+        }
         return ans;
     }
 }
