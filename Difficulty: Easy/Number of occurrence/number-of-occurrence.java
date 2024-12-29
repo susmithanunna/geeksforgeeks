@@ -32,20 +32,37 @@ class GFG {
 class Solution {
     int countFreq(int[] arr, int target) {
         // code here
-        HashMap<Integer,Integer> h1=new HashMap<>();
-        int n=arr.length;
-        for(int i=0;i<n;i++){
-            Integer c=h1.get(arr[i]);
-            if(c==null){
-                c=0;
-            }
-            h1.put(arr[i],c+1);
-        }
-        for(int it:h1.keySet()){
-            if(it==target){
-                return h1.get(it);
-            }
-        }
-        return 0;
+       int n=arr.length;
+       int low=0;
+       int high=n-1;
+       int starting=-1;
+       int ending=-1;
+       while(low<=high){
+           int mid=(low+high)/2;
+           if(arr[mid]<=target){
+              ending=mid;
+              low=mid+1;
+           }
+           else{
+               high=mid-1;
+           }
+       }
+       low=0;
+       high=n-1;
+       while(low<=high){
+           int mid=(low+high)/2;
+           if(arr[mid]>=target){
+               starting=mid;
+               high=mid-1;
+           }
+           else{
+               low=mid+1;
+           }
+       }
+       if(starting==-1 || ending==-1){
+           return 0;
+       }
+      // System.out.println(ending+" "+starting);
+       return ending-starting+1;
     }
 }
