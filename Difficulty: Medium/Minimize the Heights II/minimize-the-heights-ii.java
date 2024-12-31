@@ -26,6 +26,7 @@ public class Main {
 
             int ans = new Solution().getMinDiff(arr, k);
             System.out.println(ans);
+            System.out.println("~");
         }
     }
 }
@@ -38,21 +39,35 @@ public class Main {
 class Solution {
     int getMinDiff(int[] arr, int k) {
         // code here
-          int n=arr.length;
-         Arrays.sort(arr);
-        int min=arr[0];
-        int max=arr[n-1];
-        int ans=max-min;
+        int n=arr.length;
+       Arrays.sort(arr);
+       int max=arr[n-1];
+       int min=arr[0];
+       int ans=max-min;
         for(int i=1;i<n;i++){
-           
-            max=(int)Math.max(arr[i-1]+k,arr[n-1]-k);
+             max=(int)Math.max(arr[i-1]+k,arr[n-1]-k);
              min=(int)Math.min(arr[i]-k,arr[0]+k);
-             if(min<0){
-                 continue;
-             }
-             ans=(int)Math.min(ans,max-min);
+            if(min<0){
+                continue;
+            }
+            int diff=max-min;
+            ans=(int)Math.min(ans,diff);
         }
         return ans;
-
     }
 }
+//  int n=arr.length;
+//          Arrays.sort(arr);
+//         int min=arr[0];
+//         int max=arr[n-1];
+//         int ans=max-min;
+//         for(int i=1;i<n;i++){
+           
+//             max=(int)Math.max(arr[i-1]+k,arr[n-1]-k);
+//              min=(int)Math.min(arr[i]-k,arr[0]+k);
+//              if(min<0){
+//                  continue;
+//              }
+//              ans=(int)Math.min(ans,max-min);
+//         }
+//         return ans;
