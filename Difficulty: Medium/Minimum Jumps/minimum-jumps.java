@@ -37,26 +37,23 @@ public class Main {
 
 class Solution {
     static int minJumps(int[] arr) {
-        // your code here
-        int jumps=0;
-        int far=0;
+        // code here
         int n=arr.length;
-        if(n==1){
-            return 0;
-        }
+        int curr=0;
+       int far=0;
+       int jumps=0;
         if(arr[0]==0){
             return -1;
         }
-        int currjumpend=0;
-        for(int i=0;i<n-1;i++){
-            far=(int)Math.max(far,i+arr[i]);
-            if(i==currjumpend){
-                currjumpend=far;
-                jumps++;
-            }
-            if(currjumpend>=n-1){
-                return jumps;
-            }
+        for(int i=0;i<n;i++){
+           far=(int)Math.max(far,i+arr[i]);
+           if(i==curr){
+               curr=far;
+               jumps++;
+           }
+           if(curr>=n-1){
+              return jumps;
+           }
         }
         return -1;
     }
