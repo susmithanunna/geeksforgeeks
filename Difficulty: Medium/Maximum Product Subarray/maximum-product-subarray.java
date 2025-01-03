@@ -27,20 +27,21 @@ class Solution {
     int maxProduct(int[] arr) {
         // code here
         int n=arr.length;
-       int max=Integer.MIN_VALUE;
-       int leftprod=1;
-       int rightprod=1;
-       for(int i=0;i<n;i++){
-           leftprod=leftprod*arr[i];
-           rightprod=rightprod*arr[n-i-1];
-           max=(int)Math.max((int)Math.max(leftprod,rightprod),max);
-           if(leftprod==0){
-               leftprod=1;
-           }
-           if(rightprod==0){
-               rightprod=1;
-           }
-       }
-       return max;
+        int max=Integer.MIN_VALUE;
+        int left_prod=1;
+        int right_prod=1;
+        for(int i=0;i<n;i++){
+            left_prod=left_prod*arr[i];
+            max=(int)Math.max(max,left_prod);
+            right_prod=right_prod*arr[n-i-1];//traversing from back
+            max=(int)Math.max(max,right_prod);
+             if(left_prod==0){
+                left_prod=1;
+            }
+            if(right_prod==0){
+                right_prod=1;
+            }
+        }
+        return max;
     }
 }
