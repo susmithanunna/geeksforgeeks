@@ -1,61 +1,42 @@
 //{ Driver Code Starts
 import java.io.*;
 import java.util.*;
-import java.lang.*;
 
-
-class Array {
-
-	public static void main (String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t = Integer.parseInt(br.readLine().trim()); //Inputting the testcases
-		while(t-->0){
-		  
-		    //size of array
-		    int n = Integer.parseInt(br.readLine().trim());
-		    int arr[] = new int[n];
-		    String inputLine[] = br.readLine().trim().split(" ");
-		    
-		    //adding elements to the array
-		    for(int i=0; i<n; i++){
-		        arr[i] = Integer.parseInt(inputLine[i]);
-		    }
-		    
-		    Solution obj = new Solution();
-		    
-		    //calling trappingWater() function
-		    System.out.println(obj.trappingWater(arr, n));
-		}
-	}
+class Sorting {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+        for (int g = 0; g < t; g++) {
+            String[] str = (br.readLine()).trim().split(" ");
+            int arr[] = new int[str.length];
+            for (int i = 0; i < str.length; i++) arr[i] = Integer.parseInt(str[i]);
+            System.out.println(new Solution().trappingWater(arr));
+            System.out.println("~");
+        }
+    }
 }
-
-
 // } Driver Code Ends
 
 
-class Solution{
-    
-    // arr: input array
-    // n: size of array
-    // Function to find the trapped water between the blocks.
-    static long trappingWater(int arr[], int n) { 
-        // Your code here
-        int left[]=new int[n];
-        int right[]=new int[n];
-        left[0]=arr[0];
+class Solution {
+    public int trappingWater(int arr[]) {
+        // code here
+        int n=arr.length;
+        int leftmax[]=new int[n];
+        int rightmax[]=new int[n];
+        leftmax[0]=arr[0];
         for(int i=1;i<n;i++){
-            left[i]=(int)Math.max(left[i-1],arr[i]);
+            leftmax[i]=(int)Math.max(leftmax[i-1],arr[i]);
+            
         }
-        right[n-1]=arr[n-1];
+        rightmax[n-1]=arr[n-1];
         for(int i=n-2;i>=0;i--){
-            right[i]=(int)Math.max(right[i+1],arr[i]);
+            rightmax[i]=(int)Math.max(rightmax[i+1],arr[i]);
         }
-        long ans=0;
+        int ans=0;
         for(int i=0;i<n;i++){
-            ans=ans+((int)Math.min(left[i],right[i])-arr[i]);
+            ans=ans+(int)Math.min(leftmax[i],rightmax[i])-arr[i];
         }
         return ans;
-    } 
+    }
 }
-
-
