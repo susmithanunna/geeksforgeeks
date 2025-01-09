@@ -41,31 +41,28 @@ class Solution {
         int j=0;
         int sum=0;
         ArrayList<Integer> ans=new ArrayList<>();
-        while(j<n){
+        while(i<=j && j<n){
             sum=sum+arr[j];
             if(sum==target){
+                //System.out.println(sum+" "+i+" "+j);
                 ans.add(i+1);
                 ans.add(j+1);
                 return ans;
             }
-            else if(sum>target){
-                while(sum>target){
-                    sum=sum-arr[i];
-                    i++;
-                }
+            while(sum>target && i<=j){
+                sum=sum-arr[i];
+                i++;
                 if(sum==target){
+                     //System.out.println(sum+" "+i+" "+j);
                     ans.add(i+1);
                     ans.add(j+1);
                     return ans;
                 }
             }
+            ///System.out.println(sum+" "+i+" "+j);
             j++;
-            
         }
-        if(ans.size()==0){
-            ans.add(-1);
-        }
+        ans.add(-1);
         return ans;
-        
     }
 }
