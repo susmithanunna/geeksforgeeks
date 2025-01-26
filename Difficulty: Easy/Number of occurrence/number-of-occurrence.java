@@ -35,34 +35,34 @@ class Solution {
        int n=arr.length;
        int low=0;
        int high=n-1;
-       int starting=-1;
-       int ending=-1;
-       while(low<=high){
-           int mid=(low+high)/2;
-           if(arr[mid]<=target){
-              ending=mid;
-              low=mid+1;
-           }
-           else{
-               high=mid-1;
-           }
-       }
-       low=0;
-       high=n-1;
+       int starting=0;
+       int ending=n-1;
        while(low<=high){
            int mid=(low+high)/2;
            if(arr[mid]>=target){
-               starting=mid;
+               ending=mid;
                high=mid-1;
            }
            else{
                low=mid+1;
            }
        }
-       if(starting==-1 || ending==-1){
+       low=0;
+       high=n-1;
+       while(low<=high){
+           int mid=(low+high)/2;
+           if(arr[mid]<=target){
+               starting=mid;
+               low=mid+1;
+           }
+           else{
+               high=mid-1;
+           }
+       }
+       //System.out.println(starting+" "+ending);
+       if(arr[starting]!=target || arr[ending]!=target){
            return 0;
        }
-      // System.out.println(ending+" "+starting);
-       return ending-starting+1;
+       return starting-ending+1;
     }
 }
