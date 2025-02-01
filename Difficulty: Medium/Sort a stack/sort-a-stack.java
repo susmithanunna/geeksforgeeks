@@ -18,7 +18,9 @@ class SortedStack {
                 a.pop();
             }
             System.out.println();
-        }
+        
+System.out.println("~");
+}
     }
 }
 // } Driver Code Ends
@@ -28,22 +30,26 @@ class SortedStack {
 class GfG {
     public Stack<Integer> sort(Stack<Integer> s) {
         // add code here.
-        Stack<Integer> temp=new Stack<>();
-        while(!s.isEmpty()){
-            if(temp.isEmpty()){
-                temp.add(s.pop());
-            }
-            else if(temp.peek()<=s.peek()){
-                temp.add(s.pop());
-            }
-            else{
-                int t=s.pop();
-                while(!temp.isEmpty() && temp.peek()>t){
-                    s.add(temp.pop());
-                }
-                temp.add(t);
-            }
+        sortTheStack(s);
+        return s;
+    }
+    public void sortTheStack(Stack<Integer> s){
+        if(s.size()==0){
+            return;
         }
-        return temp;
+        int temp=s.pop();
+        sortTheStack(s);
+        insert(s,temp);
+        return;
+    }
+    public void insert(Stack<Integer> s,int val){
+        if(s.size()==0 || s.peek()<=val){
+            s.push(val);
+            return;
+        }
+        int temp=s.pop();
+        insert(s,val);
+        s.push(temp);
+        return;
     }
 }
