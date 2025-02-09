@@ -23,7 +23,9 @@ class GFG {
 
             Solution ob = new Solution();
             System.out.println(ob.numProvinces(adj,V));
-        }
+        
+System.out.println("~");
+}
     }
 }
 // } Driver Code Ends
@@ -34,28 +36,22 @@ class GFG {
 class Solution {
     static int numProvinces(ArrayList<ArrayList<Integer>> adj, int V) {
         // code here
-       
-        boolean vis[]=new boolean[V];
+        int vis[]=new int[V];
         int c=0;
-       for(int i=0;i<V;i++){
-    
-           if(!vis[i]){
-               c++;
-               dfs(i,adj,vis,V);
-           }
-       }
-       return c;
+        for(int i=0;i<V;i++){
+            if(vis[i]==0){
+                c++;
+                dfs(adj,vis,i,V);
+            }
+        }
+        return c;
     }
-    public static void dfs(int v,ArrayList<ArrayList<Integer>> adj,boolean vis[],int V){
-        vis[v]=true;
-        for(int i=0;i<adj.get(v).size();i++){
-                if(adj.get(v).get(i)==1){
-                    if(!vis[i]){
-                        dfs(i,adj,vis,V);
-                    }
-                }
-            
-            
+    static void dfs(ArrayList<ArrayList<Integer>> adj,int vis[],int node,int V){
+        vis[node]=1;
+        for(int i=0;i<V;i++){
+            if(adj.get(node).get(i)==1 && vis[i]==0){
+                dfs(adj,vis,i,V);
+            }
         }
     }
 };
