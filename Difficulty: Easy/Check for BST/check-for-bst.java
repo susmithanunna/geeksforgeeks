@@ -98,7 +98,9 @@ class GfG {
             else
                 System.out.println("false");
             t--;
-        }
+        
+System.out.println("~");
+}
     }
 }
 
@@ -112,20 +114,20 @@ class Solution {
     boolean isBST(Node root) {
         // code here.
         ArrayList<Integer> a1=new ArrayList<>();
-        inorder(root,a1);
+        preorder(root,a1);
         for(int i=1;i<a1.size();i++){
-            if(a1.get(i-1)>=a1.get(i)){
+            if(a1.get(i)<a1.get(i-1)){
                 return false;
             }
         }
         return true;
     }
-    void inorder(Node root,ArrayList<Integer> a1){
+    public void preorder(Node root,ArrayList<Integer> a1){
         if(root==null){
             return;
         }
-        inorder(root.left,a1);
+        preorder(root.left,a1);
         a1.add(root.data);
-        inorder(root.right,a1);
+        preorder(root.right,a1);
     }
 }
