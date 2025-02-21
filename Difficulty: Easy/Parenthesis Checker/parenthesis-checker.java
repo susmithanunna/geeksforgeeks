@@ -1,30 +1,28 @@
 //{ Driver Code Starts
-import java.util.*;
 import java.io.*;
 import java.lang.*;
+import java.util.*;
 
-class Driverclass
-{
-    public static void main(String args[])
-    {
+class Driverclass {
+    public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
-        
-        //Reading total number of testcases
-        int t= sc.nextInt();
-        
-        while(t-- >0)
-        {
-            //reading the string
+
+        // Reading total number of testcases
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            // reading the string
             String st = sc.next();
-            
-            //calling ispar method of Paranthesis class 
-            //and printing "balanced" if it returns true
-            //else printing "not balanced"
-            if(new Solution().ispar(st) == true)
-                System.out.println("balanced");
+
+            // calling ispar method of Paranthesis class
+            // and printing "balanced" if it returns true
+            // else printing "not balanced"
+            if (new Solution().isBalanced(st) == true)
+                System.out.println("true");
             else
-                System.out.println("not balanced");
-        
+                System.out.println("false");
+
+            System.out.println("~");
         }
     }
 }
@@ -32,37 +30,36 @@ class Driverclass
 
 
 
-class Solution
-{
-    //Function to check if brackets are balanced or not.
-    static boolean ispar(String x)
-    {
-        // add your code here
+class Solution {
+    static boolean isBalanced(String s) {
+        // code here
+        int n=s.length();
         Stack<Character> s1=new Stack<>();
-        for(int i=0;i<x.length();i++){
-            if(x.charAt(i)=='{' || x.charAt(i)=='[' || x.charAt(i)=='('){
-                s1.add(x.charAt(i));
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)=='[' || s.charAt(i)=='{' || s.charAt(i)=='('){
+                s1.add(s.charAt(i));
             }
-            else{
-                char ch=x.charAt(i);
-                if(s1.size()==0){
-                    return false;
-                }
-                else if(ch=='}' && s1.peek()!='{'){
-                    return false;
-                }
-            
-                else if(ch==']' && s1.peek()!='['){
-                    return false;
-                }
-                else if(ch==')' && s1.peek()!='('){
-                    return false;
-                }
-                else{
+            else if(!s1.isEmpty()){
+                if(s1.peek()=='[' && s.charAt(i)==']'){
                     s1.pop();
                 }
+                else if(s1.peek()=='{' && s.charAt(i)=='}'){
+                    s1.pop();
+                }
+                else if(s1.peek()=='(' && s.charAt(i)==')'){
+                    s1.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
             }
         }
-        return s1.size()==0?true:false;
+        if(s1.isEmpty()){
+            return true;
+        }
+        return false;
     }
 }
