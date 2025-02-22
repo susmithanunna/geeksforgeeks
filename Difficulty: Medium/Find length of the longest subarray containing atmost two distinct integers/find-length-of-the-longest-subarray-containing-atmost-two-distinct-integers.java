@@ -46,33 +46,30 @@ class GFG {
 class Solution {
     public static int totalElements(Integer[] arr) {
         // code here
-        int i=0;
-        int j=0;
         int n=arr.length;
         int max=0;
         HashMap<Integer,Integer> h1=new HashMap<>();
-        while(i<=j && j<n){
-            Integer c=h1.get(arr[j]);
-            if(c==null){
-                c=0;
+        int l=0;
+        for(int r=0;r<n;r++){
+            Integer c1=h1.get(arr[r]);
+            if(c1==null){
+                c1=0;
             }
-            h1.put(arr[j],c+1);
-            if(i<=j && h1.size()>2 ){
-               c=h1.get(arr[i]);
-               
-                if(c==1){
-                    h1.remove(arr[i]);
-                }
-                else{
-                    h1.put(arr[i],c-1);
-                }
-                i++;
+            h1.put(arr[r],c1+1);
+            while(l<=r && h1.size()>2){
+               Integer c=h1.get(arr[l]);
+               if(c==1){
+                   h1.remove(arr[l]);
+               }
+               else{
+                   h1.put(arr[l],c-1);
+                   
+               }
+               l++;
             }
-             max=(int)Math.max(max,j-i);
-            j++;
-            
+            max=(int)Math.max(max,r-l+1);
         }
-        max=(int)Math.max(max,j-i);
+        //max=(int)Math.max(max,n-l+1);
         return max;
     }
 }
