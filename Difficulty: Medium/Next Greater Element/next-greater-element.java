@@ -1,57 +1,64 @@
 //{ Driver Code Starts
-/*package whatever //do not write package name here */
-
-import java.util.*;
-import java.lang.*;
 import java.io.*;
+import java.util.*;
 
-class GFG {
-    
-	public static void main (String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t = Integer.parseInt(br.readLine().trim());
-		while(t-->0){
-		    int n = Integer.parseInt(br.readLine().trim());
-		    String inputLine[] = br.readLine().trim().split(" ");
-		    long[] arr = new long[n];
-		    for(int i=0; i<n; i++)arr[i]=Long.parseLong(inputLine[i]);
-		    long[] res = new Solution().nextLargerElement(arr, n);
-		    for (int i = 0; i < n; i++) 
-		        System.out.print(res[i] + " ");
-		    System.out.println();
-		}
-	}
+class Geeks {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine()); // Number of test cases
+        for (int g = 0; g < t; g++) {
+            String[] str =
+                (br.readLine()).trim().split(" "); // Reading input as a string array
+            int arr[] = new int[str.length]; // Creating integer array from the input
+            for (int i = 0; i < str.length; i++) {
+                arr[i] = Integer.parseInt(str[i]);
+            }
+
+            // Getting the result from the Solution class
+            ArrayList<Integer> result = new Solution().nextLargerElement(arr);
+
+            // Printing the result in the required format
+            if (result.isEmpty()) {
+                System.out.println("[]");
+            } else {
+                for (int i = 0; i < result.size(); i++) {
+                    if (i != 0) System.out.print(" ");
+                    System.out.print(result.get(i));
+                }
+                System.out.println();
+                System.out.println("~");
+            }
+        }
+    }
 }
-
-
-
 
 // } Driver Code Ends
 
 
-class Solution
-{
-    //Function to find the next greater element for each element of the array.
-    public static long[] nextLargerElement(long[] arr, int n)
-    { 
-        // Your code here
-       Stack<Long> s1=new Stack<>();
-       s1.add(arr[n-1]);
-        long ans[]=new long[n];
-        ans[n-1]=-1;
+class Solution {
+    // Function to find the next greater element for each element of the array.
+    public ArrayList<Integer> nextLargerElement(int[] arr) {
+        // code here
+        ArrayList<Integer> ans=new ArrayList<>();
+        int n=arr.length;
+        Stack<Integer> s1=new Stack<>();
+        s1.push(arr[n-1]);
+        ans.add(-1);
         for(int i=n-2;i>=0;i--){
             while(!s1.isEmpty() && s1.peek()<=arr[i]){
-                s1.pop();
+               s1.pop();
             }
-            if(!s1.isEmpty() &&s1.peek()>arr[i]){
-                ans[i]=s1.peek();
-                s1.add(arr[i]);
+            if(!s1.isEmpty() && s1.peek()>arr[i]){
+                ans.add(s1.peek());
+                s1.push(arr[i]);
             }
-            else{
-                ans[i]=-1;
-                s1.add(arr[i]);
+            
+            else {
+                ans.add(-1);
+                s1.push(arr[i]);
             }
         }
+        Collections.reverse(ans);
         return ans;
-    } 
+    }
 }
