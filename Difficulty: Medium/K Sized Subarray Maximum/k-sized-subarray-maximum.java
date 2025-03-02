@@ -13,7 +13,6 @@ public class Main {
 
         while (t-- > 0) {
             // taking total number of elements
-            int k = Integer.parseInt(br.readLine());
             String line = br.readLine();
             String[] tokens = line.split(" ");
 
@@ -28,23 +27,24 @@ public class Main {
             int[] arr = new int[array.size()];
             int idx = 0;
             for (int i : array) arr[idx++] = i;
-            ArrayList<Integer> res = new Solution().max_of_subarrays(k, arr);
+            int k = Integer.parseInt(br.readLine());
+            ArrayList<Integer> res = new Solution().maxOfSubarrays(arr, k);
 
             // printing the elements of the ArrayList
             for (int i = 0; i < res.size(); i++) System.out.print(res.get(i) + " ");
             System.out.println();
+            System.out.println("~");
         }
     }
 }
 // } Driver Code Ends
 
 
-// User function template for JAVA
+
 
 class Solution {
-    // Function to find maximum of each subarray of size k.
-    public ArrayList<Integer> max_of_subarrays(int k, int arr[]) {
-        // Your code here
+    public ArrayList<Integer> maxOfSubarrays(int arr[], int k) {
+        // code here
         int n=arr.length;
         ArrayList<Integer> ans=new ArrayList<>();
         // PriorityQueue<Integer> pq=new PriorityQueue<>((x,y)->Integer.compare(y,x));
@@ -71,5 +71,6 @@ class Solution {
             }
         }
         return ans;
+        
     }
 }
