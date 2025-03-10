@@ -41,10 +41,11 @@ class Solution {
     public ArrayList<Integer> calculateSpan(int[] arr) {
         // write code here
         int n=arr.length;
-        ArrayList<Integer> ans=new ArrayList<>(n);
-       
+        ArrayList<Integer> ans=new ArrayList<>();
+        ans.add(1);
         Stack<Integer> s1=new Stack<>();
-          for (int i = 0; i < n; i++) {
+        s1.push(0);
+          for (int i = 1; i < n; i++) {
             while (!s1.isEmpty() && arr[s1.peek()] <= arr[i]) {
                 s1.pop();
             }
@@ -53,7 +54,5 @@ class Solution {
             s1.push(i);
         }
         return ans;
-        
-        
     }
 }
