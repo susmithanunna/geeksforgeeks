@@ -9,17 +9,20 @@ class GFG {
         int T = Integer.parseInt(br.readLine().trim());
         while (T-- > 0) {
             String s1 = br.readLine();
-            String[] S = s1.split(" ");
-            String s = S[0];
-            String t = S[1];
+            String s2 = br.readLine();
+
             Solution ob = new Solution();
-            int ans = ob.editDistance(s, t);
+            int ans = ob.editDistance(s1, s2);
             System.out.println(ans);
+
+            System.out.println("~");
         }
     }
 }
 
 // } Driver Code Ends
+
+
 
 
 class Solution {
