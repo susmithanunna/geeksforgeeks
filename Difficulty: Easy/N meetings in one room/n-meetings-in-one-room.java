@@ -9,20 +9,25 @@ class GFG {
         int t = Integer.parseInt(br.readLine().trim());
 
         while (t-- > 0) {
-            String inputLine[] = br.readLine().trim().split(" ");
-            int n = Integer.parseInt(inputLine[0]);
+            String line1 = br.readLine();
+            String[] a1 = line1.trim().split("\\s+");
+            int n = a1.length;
+            int a[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                a[i] = Integer.parseInt(a1[i]);
+            }
 
-            int start[] = new int[n];
-            int end[] = new int[n];
+            String line2 = br.readLine();
+            String[] a2 = line2.trim().split("\\s+");
+            n = a2.length;
+            int b[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                b[i] = Integer.parseInt(a2[i]);
+            }
 
-            inputLine = br.readLine().trim().split(" ");
-            for (int i = 0; i < n; i++) start[i] = Integer.parseInt(inputLine[i]);
-
-            inputLine = br.readLine().trim().split(" ");
-            for (int i = 0; i < n; i++) end[i] = Integer.parseInt(inputLine[i]);
-
-            int ans = new Solution().maxMeetings(n, start, end);
+            int ans = new Solution().maxMeetings(a, b);
             System.out.println(ans);
+            System.out.println("~");
         }
     }
 }
@@ -33,20 +38,22 @@ class GFG {
 class Solution {
     // Function to find the maximum number of meetings that can
     // be performed in a meeting room.
-    public int maxMeetings(int n, int start[], int end[]) {
+    public int maxMeetings(int start[], int end[]) {
         // add your code here
+        int n=start.length;
         ArrayList<Pair> a1=new ArrayList<>();
         for(int i=0;i<n;i++){
             a1.add(new Pair(start[i],end[i]));
         }
         Collections.sort(a1,(a,b)->Integer.compare(a.e,b.e));
-        int c=0;
-        int prev=0;
-        for(int i=0;i<n;i++){
+        int c=1;
+        int prev=a1.get(0).e;
+        for(int i=1;i<n;i++){
             if(prev<a1.get(i).s){
                 prev=a1.get(i).e;
                 c++;
             }
+           
         }
         return c;
     }
@@ -59,3 +66,10 @@ class Pair{
         this.e=e;
     }
 }
+
+// 1 2
+// 3 4
+// 0 6
+// 5 7
+// 8 9
+// 5 9
