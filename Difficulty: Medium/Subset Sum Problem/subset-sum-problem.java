@@ -2,28 +2,25 @@
 import java.io.*;
 import java.util.*;
 
-class GFG
-{
-    public static void main(String args[])throws IOException
-    {
+class GFG {
+    public static void main(String args[]) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(read.readLine());
-        while(t-- > 0)
-        {
-            int N = Integer.parseInt(read.readLine());
+        while (t-- > 0) {
+
             String input_line[] = read.readLine().trim().split("\\s+");
-            int arr[]= new int[N];
-            for(int i = 0; i < N; i++)
-                arr[i] = Integer.parseInt(input_line[i]);
+            int N = input_line.length;
+            int arr[] = new int[N];
+            for (int i = 0; i < N; i++) arr[i] = Integer.parseInt(input_line[i]);
             int sum = Integer.parseInt(read.readLine());
 
             Solution ob = new Solution();
-            if(ob.isSubsetSum(N, arr, sum))
-            System.out.println(1);
+            if (ob.isSubsetSum(arr, sum))
+                System.out.println("true");
             else
-            System.out.println(0);
+                System.out.println("false");
 
-            
+            System.out.println("~");
         }
     }
 }
@@ -31,48 +28,29 @@ class GFG
 // } Driver Code Ends
 
 
-//User function Template for Java
+class Solution {
 
-class Solution{
-
-
-    static Boolean isSubsetSum(int N, int arr[], int sum){
+    static Boolean isSubsetSum(int arr[], int sum) {
         // code here
-        // boolean dp[][]=new boolean[N][sum+1];
-        // for(int i=0;i<N;i++){
-        //     dp[i][0]=true;
-        // }
-        // if(arr[0]<=sum){
-        //     dp[0][arr[0]]=true;
-        // }
-        // for(int i=1;i<N;i++){
-        //     for(int target=1;target<=sum;target++){
-        //         boolean nottake=dp[i-1][target];
-        //         boolean take=false;
-        //         if(arr[i]<=target){
-        //             take=dp[i-1][target-arr[i]];
-        //         }
-        //         dp[i][target]=take||nottake;
-        //     }
-        // }
-        // return dp[N-1][sum];
-        Boolean dp[][]=new Boolean[N+1][sum+1];
-        for(int i=0;i<=N;i++){
+        int n=arr.length;
+        boolean dp[][]=new boolean[n+1][sum+1];
+        for(int i=0;i<=n;i++){
             for(int j=0;j<=sum;j++){
-                if(i==0 ){
-                    dp[i][j]=false;
+                if(i==0){
+                    dp[0][j]=false;
                 }
                 if(j==0){
-                    dp[i][j]=true;
+                    dp[i][0]=true;
                 }
                 if(i!=0 && arr[i-1]<=j){
-                    dp[i][j]=(dp[i-1][j-arr[i-1]] || dp[i-1][j]);
+                    dp[i][j]=(dp[i-1][j]||(dp[i-1][j-arr[i-1]]));
                 }
                 else if(i!=0){
                     dp[i][j]=dp[i-1][j];
                 }
             }
         }
-        return dp[N][sum];
+        return dp[n][sum];
+        
     }
 }
